@@ -529,9 +529,24 @@ public class FirstPersonController : MonoBehaviour
             other.gameObject.SetActive(false);
             
         }
-
-
     }
+
+
+
+
+
+
+    /*code for checking whether player is within range for pickup (within contact of box collider), if true then show pickup text, if user clicks "E" then set original game object 
+    to false and set the duplicate to true*/
+
+
+
+
+
+
+
+
+
 }
 
 
