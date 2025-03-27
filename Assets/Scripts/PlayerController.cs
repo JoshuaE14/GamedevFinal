@@ -557,29 +557,9 @@ public class FirstPersonController : MonoBehaviour
 
         }
 
-       /* if (other.CompareTag("Player")) // Ensure it's the player
-        {
-            isPlayerInRange = true; // Player is in range to pick up item
-        }*/
+      
     }
-   /* private void PickupItem()
-    {
-        itemPickedUp = true; // Mark item as picked up
-        gameObject.SetActive(false); // Disable the original item
-        duplicateItem.SetActive(true); // Enable the duplicate item
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player")) // Ensure it's the player
-        {
-            isPlayerInRange = false; // Player is out of range
-            if (!itemPickedUp)
-            {
-                pickupText.gameObject.SetActive(false); // Hide text when out of range
-            }
-        }
-    }*/
+  
 }
 
 
@@ -601,7 +581,6 @@ public class FirstPersonController : MonoBehaviour
 
 
     
-
 
 
 // Custom Editor

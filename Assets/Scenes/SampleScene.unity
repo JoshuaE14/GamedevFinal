@@ -431,7 +431,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 40
-    m_FontStyle: 0
+    m_FontStyle: 2
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 115
@@ -1074,7 +1074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.3921223
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1604,6 +1604,30 @@ PrefabInstance:
     - target: {fileID: 7839430046857340351, guid: aeaff48ae19e7294f93b27fdb325f96a, type: 3}
       propertyPath: m_Name
       value: TestWeapon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198808640255467697, guid: aeaff48ae19e7294f93b27fdb325f96a, type: 3}
+      propertyPath: m_Size.x
+      value: 9.065324
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198808640255467697, guid: aeaff48ae19e7294f93b27fdb325f96a, type: 3}
+      propertyPath: m_Size.y
+      value: 4.5665274
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198808640255467697, guid: aeaff48ae19e7294f93b27fdb325f96a, type: 3}
+      propertyPath: m_Size.z
+      value: 5.6428075
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198808640255467697, guid: aeaff48ae19e7294f93b27fdb325f96a, type: 3}
+      propertyPath: m_Center.x
+      value: -0.015340328
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198808640255467697, guid: aeaff48ae19e7294f93b27fdb325f96a, type: 3}
+      propertyPath: m_Center.y
+      value: 0.99692345
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198808640255467697, guid: aeaff48ae19e7294f93b27fdb325f96a, type: 3}
+      propertyPath: m_Center.z
+      value: -0.03484273
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
