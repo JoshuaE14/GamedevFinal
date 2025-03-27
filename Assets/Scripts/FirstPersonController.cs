@@ -10,6 +10,13 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
+   /* public GameObject duplicateItem;
+    public Text pickupText;
+    public float interactionRange = 3f;
+    private GameObject player;
+    private bool isPlayerInRange = false;
+    private bool itemPickedUp = false;*/
+
     private Rigidbody rb;
 
     #region Camera Movement Variables
@@ -145,6 +152,9 @@ public class FirstPersonController : MonoBehaviour
 
     void Start()
     {
+       // player = GameObject.FindGameObjectWithTag("Player");
+       // pickupText.gameObject.SetActive(false);
+
         if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -356,9 +366,26 @@ public class FirstPersonController : MonoBehaviour
         {
             HeadBob();
         }
-    }
 
-    void FixedUpdate()
+        
+           /* // Show pickup text when player is in range
+            if (isPlayerInRange && !itemPickedUp)
+            {
+                pickupText.gameObject.SetActive(true); // Show text
+
+                if (Input.GetKeyDown(KeyCode.E)) // Detect "E" key press
+                {
+                    PickupItem();
+                }
+            }
+            else
+            {
+                pickupText.gameObject.SetActive(false); // Hide text when not in range or already picked up
+            }
+           */
+        }
+
+        void FixedUpdate()
     {
         #region Movement
 
@@ -527,27 +554,53 @@ public class FirstPersonController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
-            
+
         }
+
+       /* if (other.CompareTag("Player")) // Ensure it's the player
+        {
+            isPlayerInRange = true; // Player is in range to pick up item
+        }*/
+    }
+   /* private void PickupItem()
+    {
+        itemPickedUp = true; // Mark item as picked up
+        gameObject.SetActive(false); // Disable the original item
+        duplicateItem.SetActive(true); // Enable the duplicate item
     }
 
-
-
-
-
-
-    /*code for checking whether player is within range for pickup (within contact of box collider), if true then show pickup text, if user clicks "E" then set original game object 
-    to false and set the duplicate to true*/
-
-
-
-
-
-
-
-
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player")) // Ensure it's the player
+        {
+            isPlayerInRange = false; // Player is out of range
+            if (!itemPickedUp)
+            {
+                pickupText.gameObject.SetActive(false); // Hide text when out of range
+            }
+        }
+    }*/
 }
+
+
+
+
+
+
+
+
+        /*code for checking whether player is within range for pickup (within contact of box collider), if true then show pickup text, if user clicks "E" then set original game object 
+        to false and set the duplicate to true*/
+
+
+
+
+
+
+
+
+
+    
 
 
 
