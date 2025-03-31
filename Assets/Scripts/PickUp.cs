@@ -6,16 +6,20 @@ public class PickUp : MonoBehaviour
     public GameObject duplicateItem; 
     public Text pickupText;
     public float interactionRange = 3f; 
-
     private GameObject player; 
     private bool isPlayerInRange = false; 
     private bool itemPickedUp = false; 
+
+
+
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); 
         pickupText.gameObject.SetActive(false); 
     }
+
+
 
     private void Update()
     {
@@ -28,12 +32,11 @@ public class PickUp : MonoBehaviour
             {
                 PickupItem();
             }
-        }
-        else
-        {
+        }else{
             pickupText.gameObject.SetActive(false); 
         }
     }
+
 
     private void PickupItem()
     {
@@ -57,6 +60,7 @@ public class PickUp : MonoBehaviour
             isPlayerInRange = true;
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {
