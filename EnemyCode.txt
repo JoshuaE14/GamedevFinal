@@ -8,18 +8,18 @@ public class EnemyCode  MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer; ///By the way, the "whatIsGround" and "whatIsPlayer" are layers, so you need to make a player layer and a ground layer. -Jinghan Ke
+    public LayerMask whatIsGround, whatIsPlayer; //By the way, the "whatIsGround" and "whatIsPlayer" are layers, so you need to make a player layer and a ground layer. -JK (Jinghan Ke)
     public Vector3 walkpoint;
     bool walkpointset;
-    public float walkPointRange;
+    public float walkPointRange; //Increase this number to have the enemy wander around farther -JK 
     public float health;
-    Attacking
+    //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
     public float ProjectileSpeed;
     public float Arc;
-    States
+    //States
     public float sightrange, attackrange;
     public bool playerinsightrange, playerinattackrange;
 
@@ -66,10 +66,10 @@ public class EnemyCode  MonoBehaviour
         transform.LookAt(player);
         if (!alreadyAttacked)
         {
-            Attack Code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponentRigidbody();
-            rb.AddForce(transform.forward  ProjectileSpeed, ForceMode.Impulse); Forwards
-            rb.AddForce(transform.up  Arc, ForceMode.Impulse);
+            //Put Attack Code here
+            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponentRigidbody(); //The projectile needs to have a rigidbody -JK 
+            rb.AddForce(transform.forward  ProjectileSpeed, ForceMode.Impulse); //Forwards
+            rb.AddForce(transform.up  Arc, ForceMode.Impulse); //Arc
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
