@@ -8,7 +8,7 @@ public class EnemyCode  MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    public LayerMask whatIsGround, whatIsPlayer; ///By the way, the "whatIsGround" and "whatIsPlayer" are layers, so you need to make a player layer and a ground layer. -Jinghan Ke
     public Vector3 walkpoint;
     bool walkpointset;
     public float walkPointRange;
