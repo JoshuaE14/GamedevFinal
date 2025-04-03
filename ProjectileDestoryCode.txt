@@ -1,10 +1,10 @@
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class Destroy : MonoBehaviour
+public class Destroy: MonoBehaviour
 {
-    private float timer = 0f;  // Timer to track elapsed time
-    public float destroyTime = 30f;  // Time (in seconds) before the object is destroyed
+    private float timer = 0f;
+    public float destroyTime = 30f;
     public Transform target;
     public int Message;
     private void Awake()
@@ -14,11 +14,11 @@ public class Destroy : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;  // Increment the timer by the time passed since the last frame
+        timer += Time.deltaTime;
 
-        if (timer >= destroyTime)  // Check if 30 seconds have passed
+        if (timer >= destroyTime)
         {
-            Destroy(gameObject);  // Destroy the object this script is attached to
+            Destroy(gameObject);
             Debug.Log("Obj destroy");
         }
     }
