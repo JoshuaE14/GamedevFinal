@@ -6,7 +6,6 @@ public class Destroy: MonoBehaviour
     private float timer = 0f;
     public float destroyTime = 30f;
     public Transform target;
-    public int Message;
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
