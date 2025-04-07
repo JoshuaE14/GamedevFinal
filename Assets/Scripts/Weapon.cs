@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && InventoryHasWeapon())
+        if (Input.GetMouseButtonDown(0) && InventoryHasWeapon())
         {
             Attack();
         }
