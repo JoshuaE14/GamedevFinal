@@ -1,0 +1,90 @@
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.AI;
+using UnityEditor.Search;
+
+public class EnemyCode : MonoBehaviour
+{
+    public NavMeshAgent agent;
+    public Transform player;
+    public LayerMask whatIsGround, whatIsPlayer; //<- Make a Player and Ground Layers
+    public Vector3 walkpoint;
+    bool walkpointset;
+    public float walkPointRange;
+    public float health;
+    //Attacking
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+    public GameObject projectile;
+    public float ProjectileSpeed;
+    public float Arc;
+    //States
+    public float sightrange, attackrange;
+    public bool playerinsightrange, playerinattackrange;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Update()
+    {
+        playerinsightrange = Physics.CheckSphere(transform.position, sightrange, whatIsPlayer);
+        playerinattackrange = Physics.CheckSphere(transform.position, attackrange, whatIsPlayer);
+
+        if (!playerinsightrange && !playerinattackrange) Patroling();
+        if (playerinsightrange && !playerinattackrange) Chasing();
+        if (playerinsightrange && playerinattackrange) AttackPlayer();
+    }
+    private void Patroling()
+    {
+        if (!walkpointset) SearchWalkPoint();
+
+        if (walkpointset)
+            agent.SetDestination(walkpoint);
+
+        Vector3 distanceToWalkPoint = transform.position - walkpoint;
+        if (distanceToWalkPoint.magnitude < 1f)
+            walkpointset = false;
+    }
+    private void SearchWalkPoint()
+    {
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        walkpoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        if (Physics.Raycast(walkpoint, -transform.up, 2f, whatIsGround))
+        { walkpointset = true; }
+    }
+    private void Chasing()
+    { agent.SetDestination(player.position); }
+    private void AttackPlayer()
+    {
+        agent.SetDestination(transform.position);
+
+        transform.LookAt(player);
+        if (!alreadyAttacked)
+        {
+            //Attack Code here
+            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * ProjectileSpeed, ForceMode.Impulse); //Forwards
+            rb.AddForce(transform.up * Arc, ForceMode.Impulse);
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+
+    }
+    private void ResetAttack()
+    { alreadyAttacked = false; }
+
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0) Invoke(nameof(DestroyObj), 5f);
+    }
+    private void DestroyObj()
+    {
+        Destroy(gameObject);
+    }
+}

@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.AI;
+using UnityEditor.Search;
 
 public class Enemy : MonoBehaviour
 {
@@ -19,5 +22,4 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);  
     }
 }
-
 
