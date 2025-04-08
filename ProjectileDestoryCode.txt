@@ -1,0 +1,32 @@
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
+public class Destroy: MonoBehaviour
+{
+    private float timer = 0f;
+    public float destroyTime = 30f;
+    public Transform target;
+    private void Awake()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= destroyTime)
+        {
+            Destroy(gameObject);
+            Debug.Log("Obj destroy");
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform == target)
+        {
+            Destroy(gameObject);
+            Debug.Log("Player has been damaged");
+        }
+    }
+}
