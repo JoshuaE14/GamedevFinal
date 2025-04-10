@@ -84,6 +84,7 @@ public class EnemyCode  MonoBehaviour
     }
     private void DestroyEnemy()
     {
+        Instantiate(Drops, transform.position, transform.rotation); //Drops = exp
         Destroy(gameObject);
     }
 }
