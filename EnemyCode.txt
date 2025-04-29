@@ -3,9 +3,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.AI;
 using UnityEditor.Search;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyCode : MonoBehaviour
 {
+    //Stuff
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer; //<- Make a Player and Ground Layers
@@ -14,6 +16,8 @@ public class EnemyCode : MonoBehaviour
     public float walkPointRange;
     public float health;
     private GameObject Drops;
+    private WinConditions winConditions;
+    public AudioSource audioSource;
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -28,9 +32,11 @@ public class EnemyCode : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
+        winConditions = Object.FindFirstObjectByType<WinConditions>();
         Drops = GameObject.Find("Exp");
     }
     private void Update()
@@ -52,6 +58,7 @@ public class EnemyCode : MonoBehaviour
         Vector3 distanceToWalkPoint = transform.position - walkpoint;
         if (distanceToWalkPoint.magnitude < 1f)
             walkpointset = false;
+
     }
     private void SearchWalkPoint()
     {
@@ -62,7 +69,10 @@ public class EnemyCode : MonoBehaviour
         { walkpointset = true; }
     }
     private void Chasing()
-    {agent.SetDestination(player.position);}
+    {
+        agent.SetDestination(player.position);
+
+    }
     private void AttackPlayer()
     {
         agent.SetDestination(transform.position);
@@ -76,6 +86,8 @@ public class EnemyCode : MonoBehaviour
             rb.AddForce(transform.up * Arc, ForceMode.Impulse);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            Invoke(nameof(AttackingAudio), 0.25f); ;
+
         }
 
     }
@@ -88,7 +100,16 @@ public class EnemyCode : MonoBehaviour
     }
     public void DestroyObj()
     {
-        Instantiate(Drops, transform.position, transform.rotation); //Exp = drops
+        Instantiate(Drops, transform.position, transform.rotation);
         Destroy(gameObject);
+
+        if (winConditions != null)
+        {
+            winConditions.AddToCount();
+            winConditions.UpdateEnemyCountText();
+
+        }
     }
+    private void AttackingAudio()
+    {audioSource.Play();}
 }
