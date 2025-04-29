@@ -1,0 +1,44 @@
+using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+public class StatusEffect : MonoBehaviour
+{
+private PlayerHealth PlayerHealthScript;
+public float burnDuration = 5f; // total time of burn effect
+public float burnInterval = 1f; // how often to apply damage
+public float burnDamagePerTick = 5f; // damage per tick
+public bool isBurning = false;
+private GameObject specialProjectile;
+public RawImage RawImage;
+
+public void Start()
+{
+    RawImage.enabled = false;
+    PlayerHealthScript = Object.FindFirstObjectByType<PlayerHealth>();
+    specialProjectile = GameObject.Find("SlowProjectile");
+}
+
+public void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject == specialProjectile && !isBurning)
+    {
+        StartCoroutine(ApplyBurnEffect());
+    }
+}
+
+public System.Collections.IEnumerator ApplyBurnEffect()
+{
+    isBurning = true;
+    float elapsed = 0f;
+
+    while (elapsed < burnDuration)
+    {
+        PlayerHealthScript.TakeDamage(burnDamagePerTick);
+        yield return new WaitForSeconds(burnInterval);
+        elapsed += burnInterval;
+    }
+    isBurning = false;
+
+}
+}
+
